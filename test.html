@@ -1,62 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/media.css">
-    <script src="js/media.js"></script>
-    <title>个人博客</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人博客</title>
+  <style>
+    /* 重置样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* 隐藏默认鼠标，由自定义鼠标代替 */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      cursor: none;
+    }
+    /* 顶部导航栏 */
+    nav {
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    nav .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ff6347;
+    }
+    /* 主体内容 */
+    .container {
+      margin-top: 70px; /* 避免导航栏遮挡 */
+      padding: 20px;
+      text-align: center;
+    }
+    .myPhoto {
+      margin-bottom: 20px;
+    }
+    .myPhoto img {
+      width: 150px;
+      height: 200px;
+      border: 5px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+    .myPhoto img:hover {
+      transform: scale(1.05);
+    }
+    .detail h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+    .detail p {
+      margin-bottom: 10px;
+    }
+    .detail a {
+      display: inline-block;
+      margin: 5px 10px;
+      padding: 8px 15px;
+      background: #333;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .detail a:hover {
+      background: #ff6347;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: #fff;
+      margin-top: 20px;
+    }
+    /* 自定义鼠标样式 */
+    #customCursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
+    /* 鼠标拖尾效果 */
+    .trail {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 99, 71, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: fadeTrail 0.6s forwards;
+      z-index: 9999;
+    }
+    @keyframes fadeTrail {
+      from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      to { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left">
-            <video src="./video/dahai.mp4" type="video/mp4" autoplay contorls>
-        </div>
-        <div class="right">
-            <p>从那遥远海边 慢慢消失的你</p>
-            <p>本来模糊的脸 竟然渐渐清晰</p>
-            <p>想要说些什么 又不知从何说起</p>
-            <p>只有把它放在心底</p>
-            <p>茫然走在海边 看那潮来潮去</p>
-            <p>徒劳无功 想把每朵浪花记清</p>
-            <p>想要说声爱你 却被吹散在风里</p>
-            <p>猛然回头 你在那里</p>
-            <p>如果大海能够唤回曾经的爱</p>
-            <p>就让我用一生等待</p>
-            <p>如果深情往事 你已不再留恋</p>
-            <p>就让它随风飘远</p>
-            <p>如果大海能够带走我的哀愁</p>
-            <p>就像带走每条河流</p>
-            <p>所有受过的伤</p>
-            <p>所有流过的泪</p>
-            <p>我的爱</p>
-            <p>请全部带走</p>
-            <p>茫然走在海边 看那潮来潮去</p>
-            <p>徒劳无功 想把每朵浪花记清</p>
-            <p>想要说声爱你 却被吹散在风里</p>
-            <p>猛然回头你在那里</p>
-            <p>如果大海能够唤回曾经的爱</p>
-            <p>就让我用一生等待</p>
-            <p>如果深情往事 你已不再留恋</p>
-            <p>就让它随风飘远</p>
-            <p>如果大海能够带走我的哀愁</p>
-            <p>就像带走每条河流</p>
-            <p>所有受过的伤</p>
-            <p>所有流过的泪</p>
-            <p>我的爱</p>
-            <p>请全部带走</p>
-            <p>如果大海能够唤回曾经的爱</p>
-            <p>就让我用一生等待</p>
-            <p>如果深情往事 你已不再留恋</p>
-            <p>就让它随风飘远</p>
-            <p>如果大海能够带走我的哀愁</p>
-            <p>就像带走每条河流</p>
-            <p>所有受过的伤</p>
-            <p>所有流过的泪</p>
-            <p>我的爱</p>
-            <p>请全部带走</p>
-        </div>
+  <!-- 导航栏 -->
+  <nav>
+    <div class="logo">郭宇的博客</div>
+    <ul>
+      <li><a href="./english.html">English</a></li>
+      <li><a href="./CV.html">简历</a></li>
+      <li><a href="./tanchishe.html">游戏</a></li>
+      <li><a href="./media.html">媒体</a></li>
+      <li><a href="./comment.html">留言</a></li>
+      <li><a href="./test.html">测试</a></li>
+    </ul>
+  </nav>
+  <!-- 主体内容 -->
+  <div class="container">
+    <div class="myPhoto">
+      <img src="img/profile.jpg" alt="头像" class="profile" />
+      <h3>郭宇</h3>
     </div>
-    
+    <div class="detail">
+      <h1>欢迎访问我的个人博客</h1>
+      <p>这个项目是我的测试网站，也是我的第一个公开网页，我会在网站中分享部分知识，希望大家共同进步！</p>
+      <p>目前熟悉的编程语言：Erlang, Haskell, C, C++, C#, Java, PHP, Python, (HTML, CSS, JS)</p>
+      <p>正在学习 Docker 技术</p>
+      <p><a href="https://gitee.com/guo00yu/">我的 Gitee 主页</a></p>
+    </div>
+  </div>
+  <footer>
+    <p>郭宇 @copyright</p>
+  </footer>
+  <!-- 自定义鼠标元素 -->
+  <div id="customCursor"></div>
+  <script>
+    const customCursor = document.getElementById('customCursor');
+
+    document.addEventListener('mousemove', function(e) {
+      // 立即更新自定义鼠标的位置，使其代替系统鼠标
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+
+      // 生成拖尾效果的元素
+      const trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = e.pageX + 'px';
+      trail.style.top = e.pageY + 'px';
+      document.body.appendChild(trail);
+      setTimeout(() => {
+        trail.remove();
+      }, 600);
+    });
+
+    // 当鼠标经过链接、标题、段落、列表项时，放大自定义鼠标并改变颜色
+    const interactiveElements = document.querySelectorAll('a, h1, h2, h3, p, li');
+    interactiveElements.forEach(elem => {
+      elem.addEventListener('mouseenter', () => {
+        customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        customCursor.style.background = 'rgba(255, 99, 71, 0.7)';
+      });
+      elem.addEventListener('mouseleave', () => {
+        customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        customCursor.style.background = 'rgba(0, 0, 0, 0.7)';
+      });
+    });
+  </script>
 </body>
 </html>
