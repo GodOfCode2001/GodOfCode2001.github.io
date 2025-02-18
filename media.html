@@ -35,6 +35,7 @@
     /* 手机端适配：屏幕宽度小于768px时，采用纵向排列 */
     @media (max-width: 768px) {
       .container {
+        display: flex;
         flex-direction: column;
       }
       .left, .right {
@@ -49,6 +50,9 @@
       }
       /* 可根据需要调整手机端歌词区域高度 */
       .right {
+        padding-top: 200px;
+        padding-bottom: auto;
+        width: auto;
         height: 300px;
       }
     }

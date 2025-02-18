@@ -81,14 +81,14 @@
 		var touchStartX = null;
 		var touchStartY = null;
 
-		canvas.addEventListener("touchstart", function(e) {
+		document.addEventListener("touchstart", function(e) {
 			var touch = e.touches[0];
 			touchStartX = touch.clientX;
 			touchStartY = touch.clientY;
 			e.preventDefault();
 		}, false);
 
-		canvas.addEventListener("touchend", function(e) {
+		document.addEventListener("touchend", function(e) {
 			if(touchStartX === null || touchStartY === null) return;
 			var touchEnd = e.changedTouches[0];
 			var dx = touchEnd.clientX - touchStartX;
