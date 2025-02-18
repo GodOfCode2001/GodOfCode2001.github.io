@@ -5,7 +5,10 @@
 	<title>贪吃蛇游戏</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		body{
+		html,body{
+			width: 100%;
+			height: 100%;
+			overflow: hidden; /* 隐藏滚动条 */
 			margin: 0;
 			padding: 0;
 			background-color: #ddd;
@@ -81,14 +84,14 @@
 		var touchStartX = null;
 		var touchStartY = null;
 
-		document.addEventListener("touchstart", function(e) {
+		canvas.addEventListener("touchstart", function(e) {
 			var touch = e.touches[0];
 			touchStartX = touch.clientX;
 			touchStartY = touch.clientY;
 			e.preventDefault();
 		}, false);
 
-		document.addEventListener("touchend", function(e) {
+		canvas.addEventListener("touchend", function(e) {
 			if(touchStartX === null || touchStartY === null) return;
 			var touchEnd = e.changedTouches[0];
 			var dx = touchEnd.clientX - touchStartX;
