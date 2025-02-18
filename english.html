@@ -1,52 +1,47 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css?v=1.0.3">
-    <script src="js/index.js?v=1.0.3"></script>
-    <title>个人博客</title>
+    <title>Personal blog</title>
+    <link rel="stylesheet" href="css/index.css?v=1.0.4">
+    <script src="js/index.js?v=1.0.4"></script>
 </head>
 <body>
-    <div class="container">
+    <!-- 个人主页背景 -->
+    <div class="header">
+        <div class="profile-info">
+            <img src="img/profile.jpg" alt="头像" class="profile-pic">
+            <h2>Guo Yu</h2>
+            <a href="./index.html" class="language-link">Chinese</a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="contentContainer">
         <div class="myPhoto">
-            <img src="img/profile.jpg" alt="头像" class="profile"/>
-            <h3>Guo Yu<a href="./index.html">Chinese</a></h3>
+            <h3>切换语言 <a href="./index.html">中文</a></h3>
         </div>
         <div class="detail">
-            <h1 class="title1">Welcome My WebPage</h1>
-            <p>This project is my test website, but also my first public page, I will share some knowledge in the website, hope that we will make progress together!</p>
-            <p>Currently familiar with programming languages including Erlang Haskell C C++ C# Java PHP Python (HTML CSS JS)</p>
-            <p>Learning Docker technology</p>
-            <a href="https://gitee.com/guo00yu/">click to skip page to Gitee</a>
-            <a href="./ENGLISHCV.html">Look at CV</a>
-            <a href="./tanchishe.html">Play-Game</a>
-            <a href="./media.html">Listen-Music？</a>
-            <a href="./comment.html">Comment-Area</a>
-            <a href="./test.html">Testing-WebPage</a>
+            <h1 class="title1">Welcome to my personal blog</h1>
+            <p>Welcome to visit my blog. I will share some experience notes on the website and hope that we can make progress together!</p>
+            <p>Currently familiar with programming languages: Erlang, Haskell, C, C++, C#, Java, PHP, Python, (HTML, CSS, JS)</p>
+            <p>Learning: Docker technology</p>
+            <a href="https://gitee.com/guo00yu/">Click to view my Gitee homepage</a>
+            <a href="./ENGLISHCV.html">Click to view resume</a>
+            <a href="./tanchishe.html">Click to Play a little game to relax!</a>
+            <a href="./media.html">Click to listen to me sing a song</a>
+            <a href="./comment.html">Click to comment</a>
+            <a href="./test.html">Test WebPage</a>
         </div>
-
     </div>
+
+    <!-- 页脚 -->
     <footer class="footer">
-        <p>Guo Yu@copyright</p>
+        <p>Guo Yu @ Copyright</p>
     </footer>
 </body>
-    <script>
-        // 使用 fetch() 发送带有 ngrok-skip-browser-warning 的请求
-        fetch('http://<ngrok-url>', {
-            method: 'GET',
-            headers: {
-                'ngrok-skip-browser-warning': 'true'
-            }
-        })
-        .then(response => response.text())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-    </script>
 </html>
-
-
