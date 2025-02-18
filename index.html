@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+    <title>个人博客</title>
+</head>
+<body>
+    <div class="container">
+        <div class="myPhoto">
+            <img src="img/profile.jpg" alt="头像" class="profile"/>
+            <h3>郭宇</h3>
+        </div>
+        <div class="detail">
+            <h1 class="title1">欢迎访问我的个人博客</h1>
+            <p>这个项目是我的测试网站，也是我的第一个公开网页，我会在网站中分享部分知识，希望大家共同进步！</p>
+            <p>目前熟悉程序语言包含 Erlang Haskell C C++ C# Java PHP Python (HTML CSS JS) </p>
+            <p>正在学习 Docker技术 </p>
+            <a href="https://gitee.com/guo00yu/">点击跳转到我的Gitee主页</a>
+            <a href="./tanchishe.php">玩个游戏休闲一下</a>
+            <a href="./media.php">有兴趣听我高歌一曲吗？ 点击即可获得</a>
+            <a href="./test.php">测试网页</a>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <p>郭宇@copyright</p>
+    </footer>
+</body>
+    <script>
+        // 使用 fetch() 发送带有 ngrok-skip-browser-warning 的请求
+        fetch('http://<ngrok-url>', {
+            method: 'GET',
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    </script>
+</html>
+
+

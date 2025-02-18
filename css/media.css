@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+}
+.left{
+    
+}
+.right{
+    margin-left: 20px;
+    border: 2px solid red;
+    width: 1000px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+video{
+    width: 400px;
+    height: 400px;
+}

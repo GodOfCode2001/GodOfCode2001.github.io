@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>贪吃蛇游戏</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			background-color: #ddd;
+		}
+
+		canvas{
+			display: block;
+			margin: 0 auto;
+			border: 5px solid #333;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400"></canvas>
+
+	<script>
+		// 获取画布和上下文对象
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+
+		// 定义蛇身的长度和宽度
+		var snakeSize = 10;
+
+		// 初始化蛇的起始位置和长度
+		var snake = [];
+		snake[0] = {
+			x: Math.floor(canvas.width / 2 / snakeSize) * snakeSize,
+			y: Math.floor(canvas.height / 2 / snakeSize) * snakeSize
+		}
+		var snakeLength = 3;
+
+		// 定义食物的位置
+		var food = {
+			x: Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize,
+			y: Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize,
+		}
+
+		// 定义分数
+		var score = 0;
+
+		// 定义蛇的运动方向
+		var direction = "right";
+
+		// 监听用户按键事件
+		document.addEventListener("keydown", function(event){
+			switch(event.keyCode){
+				case 37: // left
+					if(direction != "right") {
+						direction = "left";
+					}
+					break;
+				case 38: // up
+					if(direction != "down") {
+						direction = "up";
+					}
+					break;
+				case 39: // right
+					if(direction != "left") {
+						direction = "right";
+					}
+					break;
+				case 40: // down
+					if(direction != "up") {
+						direction = "down";
+					}
+					break;	
+			}
+		});
+
+		// 绘制蛇和食物
+		function draw(){
+			// 清除画布
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// 绘制蛇身
+			for(var i=0; i<snakeLength; i++){
+				ctx.fillStyle = "#333";
+				ctx.fillRect(snake[i].x, snake[i].y, snakeSize, snakeSize);
+			}
+
+			// 绘制食物
+			ctx.fillStyle = "#f00";
+			ctx.fillRect(food.x, food.y, snakeSize, snakeSize);
+
+			// 绘制分数
+			ctx.fillStyle = "#333";
+			ctx.font = "20px Arial";
+			ctx.fillText("Score: " + score, 10, 30);
+		}
+
+		// 更新蛇的位置
+		function update(){
+			// 根据当前运动方向更新蛇的位置
+			switch(direction){
+				case "left":
+					snake.unshift({x: snake[0].x - snakeSize, y: snake[0].y});
+					break;
+				case "up":
+					snake.unshift({x: snake[0].x, y: snake[0].y - snakeSize});
+					break;
+				case "right":
+					snake.unshift({x: snake[0].x + snakeSize, y: snake[0].y});
+					break;
+				case "down":
+					snake.unshift({x: snake[0].x, y: snake[0].y + snakeSize});
+					break;
+			}
+
+			// 如果蛇头碰到边界，游戏结束
+			if(snake[0].x < 0 || snake[0].x >= canvas.width || snake[0].y < 0 || snake[0].y >= canvas.height){
+				clearInterval(gameLoop);
+				alert("游戏结束！你的得分是：" + score + " 分");
+                location.assign("./index.php");
+				// location.reload();
+			}
+
+			// 如果蛇头碰到自己的身体，游戏结束
+			for(var i=1; i<snakeLength; i++){
+				if(snake[0].x === snake[i].x && snake[0].y === snake[i].y){
+					clearInterval(gameLoop);
+					alert("游戏结束！你的得分是：" + score + " 分");
+					location.reload();
+				}
+			}
+
+			// 如果吃到食物，身体增长
+			if(snake[0].x === food.x && snake[0].y === food.y){
+				food.x = Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize;
+				food.y = Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize;
+				snakeLength++;
+				score++;
+			}else{
+				snake.pop();
+			}
+		}
+
+		// 初始化蛇的位置
+		function initSnake(){
+			for(var i=1; i<snakeLength; i++){
+				snake.push({x: snake[0].x - i * snakeSize, y: snake[0].y});
+			}
+			draw();
+		}
+
+		// 初始化游戏环境
+		function initGame(){
+			initSnake();
+			gameLoop = setInterval(function(){
+				update();
+				draw();
+			}, 100);
+		}
+
+		// 开始游戏
+		initGame();
+	</script>
+</body>
+</html>

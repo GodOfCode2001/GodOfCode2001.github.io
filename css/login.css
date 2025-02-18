@@ -1,0 +1,93 @@
+@media only screen and (max-width: 600px) {
+    body {
+        background-size: 600px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    body {
+        background-size: 400px;
+    }
+}
+#search {
+    /* border: dashed; */
+    border-width: 2px 4px;
+    border-radius: 40px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* 确保搜索框在其他内容之上 */
+    background-color: #ffffff;
+    padding: 10px;
+    width: 400px; 
+}
+.search_btn{
+    border-width: 2px 4px;
+    border-radius: 40px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(370%);
+    z-index: 9999; /* 确保搜索框在其他内容之上 */
+    background-color: #ffffff;
+    padding: 10px;
+}
+.Wesearch p{
+    color:maroon;
+    position: fixed;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-450%);
+    z-index: 9999; /* 确保搜索框在其他内容之上 */
+    padding: 10px;
+
+}
+
+body {
+    height: 100vh;
+    background: transparent;
+    background-image: url(../img/login.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* display: flex; */
+}
+
+.login {
+    padding: auto;
+    align-content: center;
+    background-image: url("img/image.png");
+    font-size: larger;
+    float: none;
+}
+
+.loginCard {
+    width: fit-content;
+    border: 10px solid pink;
+    /*内边框*/
+    padding: 12px 24px;
+    /*间距  （四个参数 上 右 下 左）  （两个参数 上下 左右）*/
+    margin: 200px auto;
+    /*外边距*/
+    background-color: rgba(255,255,255,0.8);
+}
+.loginCard .logo{
+    margin: 0 auto;
+    border: 10px solid yellowgreen; 
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 14px 2px;
+}
+.loginCard .logo img{
+    width: 100%;
+}
+
+.Isubmit {
+    text-align: center;
+}
+
+.loginInput {
+    text-align: center;
+    width: 80px;
+    height: 30px;
+}

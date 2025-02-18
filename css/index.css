@@ -1,0 +1,83 @@
+@media (max-width: 1400px) {
+    .container{
+        display: flex;
+    }
+    .myPhoto{
+        width: 15px;
+        height: 20px;
+        border-radius: 5px;
+        margin: 2px ;
+        border: 2px solid rgb(174, 47, 134);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+    
+        
+    }
+    .profile{
+        width: 40px;
+        height: 60px;
+        }
+    .detail{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        /* border: 2px solid rgb(174, 47, 134); */
+        display: flex;
+        justify-content: center;
+        
+    }
+    .title1{
+        align-items: center;
+    }
+    
+    
+  }
+html{
+    --bg-width: 100vw; /* 默认背景宽度 */
+    --bg-height: 100vh; /* 默认背景高度 */
+    background-size: var(--bg-width) var(--bg-height);
+    /* background-image: url("../img/bg.jpg"); */
+}
+
+.container{
+    display: flex;
+}
+.myPhoto{
+    width: 150px;
+    height: 200px;
+    border-radius: 50px;
+    margin: 20px ;
+    border: 2px solid rgb(174, 47, 134);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  
+}
+.profile{
+    width: 90px;
+    height: 120px;
+    }
+.detail{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    /* border: 2px solid rgb(174, 47, 134); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+
+.footer{
+    position: fixed;
+    left : 50%;
+    bottom: 0;
+}
+a:hover{
+    cursor: zoom-in;
+    /* cursor: crosshair; */
+}
+

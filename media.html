@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/media.css">
+    <script src="js/media.js"></script>
+    <title>个人博客</title>
+    <style>
+        .container {
+            display: flex;
+        }
+        .left {
+            flex: 1;
+        }
+        .right {
+            flex: 1;
+            height: 400px; /* 设置歌词显示区域的高度 */
+            overflow: hidden; /* 隐藏超出的歌词部分 */
+            position: relative;
+        }
+        .lyrics {
+            position: absolute;
+            top: 0;
+            transition: top 0.5s ease; /* 平滑滚动效果 */
+        }
+        .lyrics p {
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+        .highlight {
+            color: red; /* 当前歌词高亮显示 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <video id="myVideo" src="./video/dahai.mp4" type="video/mp4" autoplay controls width="500">
+            </video>
+        </div>
+        <div class="right">
+            <div class="lyrics" id="lyrics">
+                <p>1|从那遥远海边 慢慢消失的你</p>
+                <p>6.5|本来模糊的脸 竟然渐渐清晰</p>
+                <p>12|想要说些什么 又不知从何说起</p>
+                <p>18|只有把它放在心底</p>
+                <p>25|茫然走在海边 看那潮来潮去</p>
+                <p>31|徒劳无功 想把每朵浪花记清</p>
+                <p>37|想要说声爱你 却被吹散在风里</p>
+                <p>43|猛然回头 你在那里</p>
+                <p>48|如果大海能够唤回曾经的爱</p>
+                <p>54|就让我用一生等待</p>
+                <p>60|如果深情往事 你已不再留恋</p>
+                <p>66|就让它随风飘远</p>
+                <p>71|如果大海能够带走我的哀愁</p>
+                <p>77|就像带走每条河流</p>
+                <p>83|所有受过的伤</p>
+                <p>86|所有流过的泪</p>
+                <p>90|我的爱</p>
+                <p>92|请全部带走</p>
+                <p>102|茫然走在海边 看那潮来潮去</p>
+                <p>108|徒劳无功 想把每朵浪花记清</p>
+                <p>113|想要说声爱你 却被吹散在风里</p>
+                <p>120|猛然回头你在那里</p>
+                <!-- <p>178|如果大海能够唤回曾经的爱</p>
+                <p>188|就让我用一生等待</p>
+                <p>198|如果深情往事 你已不再留恋</p>
+                <p>208|就让它随风飘远</p>
+                <p>218|如果大海能够带走我的哀愁</p>
+                <p>228|就像带走每条河流</p>
+                <p>238|所有受过的伤</p>
+                <p>248|所有流过的泪</p>
+                <p>258|我的爱</p>
+                <p>268|请全部带走</p>
+                <p>278|如果大海能够唤回曾经的爱</p>
+                <p>288|就让我用一生等待</p>
+                <p>298|如果深情往事 你已不再留恋</p>
+                <p>308|就让它随风飘远</p>
+                <p>318|如果大海能够带走我的哀愁</p>
+                <p>328|就像带走每条河流</p>
+                <p>338|所有受过的伤</p>
+                <p>348|所有流过的泪</p>
+                <p>358|我的爱</p>
+                <p>368|请全部带走</p> -->
+                
+                <!-- 更多歌词... -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 监听视频播放进度并同步歌词滚动
+        var video = document.getElementById("myVideo");
+        var lyrics = document.getElementById("lyrics");
+        var lyricItems = lyrics.getElementsByTagName("p");
+        
+        // 定义每行歌词的时间和滚动位置
+        var lyricsData = [];
+        for (var i = 0; i < lyricItems.length; i++) {
+            var text = lyricItems[i].innerText;
+            var parts = text.split("|"); // 使用 | 分隔时间和歌词内容
+            lyricsData.push({
+                time: parseFloat(parts[0]), // 歌词出现的时间
+                element: lyricItems[i]       // 对应的歌词元素
+            });
+            lyricItems[i].innerText = parts[1]; // 只显示歌词
+        }
+
+        // 每次视频时间更新时
+        video.addEventListener("timeupdate", function() {
+            var currentTime = video.currentTime;
+
+            // 查找当前应该显示的歌词
+            for (var i = 0; i < lyricsData.length; i++) {
+                var lyric = lyricsData[i];
+
+                // 高亮当前歌词
+                if (currentTime >= lyric.time) {
+                    for (var j = 0; j < lyricItems.length; j++) {
+                        lyricItems[j].classList.remove("highlight");
+                    }
+                    lyric.element.classList.add("highlight");
+
+                    // 滚动歌词容器
+                    var topPosition = -(lyric.element.offsetTop - 100); // 让歌词居中显示
+                    lyrics.style.top = topPosition + "px";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
