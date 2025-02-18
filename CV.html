@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人简历 - 郭宇</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 全局重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #eaf0f6;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 1.8em;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #3498db;
+      margin-bottom: 20px;
+      color: #34495e;
+    }
+    /* 基本资料采用网格布局 */
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .info div {
+      background: #f9f9f9;
+      padding: 10px 15px;
+      border-left: 4px solid #3498db;
+      border-radius: 5px;
+    }
+    /* 列表样式 */
+    ul {
+      list-style: none;
+    }
+    ul li {
+      background: #f1f7fc;
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      border-left: 4px solid #3498db;
+      border-radius: 5px;
+    }
+    /* 链接样式 */
+    a {
+      color: #3498db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* 工作经历与项目经历样式 */
+    article {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    article:last-child {
+      border-bottom: none;
+    }
+    .job-header, .project-header {
+      margin-bottom: 10px;
+    }
+    .job-header time, .project-header time {
+      color: #3498db;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .job-header h3, .project-header h3 {
+      display: inline-block;
+      font-size: 1.4em;
+      color: #2c3e50;
+    }
+    .job-position {
+      font-style: italic;
+      color: #555;
+      margin-top: 5px;
+    }
+    /* 自我评价采用分段容器 */
+    .self-evaluation div {
+      margin-bottom: 15px;
+      text-indent: 2em;
+    }
+    /* 响应式设计 */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+      header h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.5em;
+      }
+      .info {
+        grid-template-columns: 1fr;
+      }
+      .job-header h3, .project-header h3 {
+        font-size: 1.2em;
+      }
+      ul li {
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>个人简历</h1>
+    </header>
+
+    <section>
+      <h2>基本资料</h2>
+      <div class="info">
+        <div><strong>姓名：</strong> 郭宇</div>
+        <div><strong>出生年月：</strong> 2001-07-10</div>
+        <div><strong>性别：</strong> 男</div>
+        <div><strong>民族：</strong> 汉族</div>
+        <div><strong>学历：</strong> 硕士</div>
+        <div><strong>海外电话：</strong> (+36)20-5053247</div>
+        <div><strong>中国电话：</strong> 18845559238</div>
+        <div><strong>电子邮件：</strong>
+          <a href="mailto:1275595551@qq.com">1275595551@qq.com</a>,
+          <a href="mailto:gy1275595551@gmail.com">gy1275595551@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>教育背景</h2>
+      <ul>
+        <li>2019.9 - 2023.6 (黑龙江科技大学, 计算机科学与技术, GPA: 3.9 专业第二)</li>
+        <li>2023.9 - 至今 (Eötvös Loránd University 罗兰大学, 软件工程, GPA: 90%)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>技能</h2>
+      <ul>
+        <li>语言能力：雅思B2级别，有良好的听说读写能力，能阅读技术类文档资料</li>
+        <li>专业技能：主攻分布式开发，擅长绝大部分函数式编程语言。</li>
+        <li>办公技能：熟练使用Linux各个发行版系统，数据库擅长SQL Server、MySQL、MongoDB。</li>
+        <li>编程技术：掌握了C语言、C++、JAVA、C#、Python、PHP、JavaScript等主流编程语言，Haskell、Clean、Erlang等小众编程语言，Coq规范性程序语言、Atelier B范式语言、Android开发等，且具有良好的编码习惯。</li>
+        <li>全栈技术：掌握了Vue等前端框架，Spring Boot后端框架，并使用Vue+Node.js开发植物大战僵尸联网小游戏。</li>
+        <li>沟通能力：本科在校期间担任学生会主席，有很好的组织协调能力和人际交往能力。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>工作经历</h2>
+      <article class="job">
+        <div class="job-header">
+          <time>2024.10-2025.02</time>
+          <h3>Hungary Huawei Technologies Kft. (匈牙利华为技术有限公司)</h3>
+          <div class="job-position">职位：软件支持工程师</div>
+        </div>
+        <ul>
+          <li>使用Python开发Dashboard，实现数据可视化，为部分数据产品赋能。</li>
+          <li>对华为Discovery平台进行日常维护，并参与制作业务地图，离线地图。</li>
+          <li>对平台服务端进行网元配置，对GSM、UMTS、LTE、NR有关特性进行调测。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>主要项目经历</h2>
+      <article class="project">
+        <div class="project-header">
+          <h3>基于微信小程序的在线商城项目（UniApp）</h3>
+          <time>2022.10-2022.12</time>
+        </div>
+        <ul>
+          <li>采用 UniApp 开发，支持微信小程序端运行，适配多终端访问。</li>
+          <li>实现商品展示、购物车、订单管理、在线支付等完整的电商功能，提供流畅的购物体验。</li>
+          <li>采用 Vue 组件化开发，优化界面交互，提升用户操作便捷性与系统响应速度。</li>
+          <li>用户认证与支付：支持微信账号登录，集成微信支付接口，实现安全便捷的在线支付。</li>
+          <li>智能地址管理：调用微信地址定位 API，自动获取用户位置并填充至收货地址，简化购买流程。</li>
+          <li>代码库链接：<a href="https://gitee.com/guo00yu/uni-shop" target="_blank">https://gitee.com/guo00yu/uni-shop</a></li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <div class="project-header">
+          <h3>基于Vue框架开发流程管理应用</h3>
+          <time>2023.10-2023.12</time>
+        </div>
+        <ul>
+          <li>前端基于 Vue 框架，后端采用 Spring Boot 开发</li>
+          <li>具体功能包括：页面放大缩小、导出流程图、导入流程图、添加节点、节点数据端点连接，根据连接关系实现数据传递，节点内部允许用户使用自定义代码对输入数据进行计算。</li>
+          <li>允许用户拖拽添加节点，设置输入输出，并根据节点逻辑自动执行任务</li>
+          <li>实现运行任务调度和数据流控制，可用于工作流管理、任务自动化等场景</li>
+          <li>代码库链接：
+            <a href="https://gitee.com/rd-im/im-uniapp" target="_blank">https://gitee.com/rd-im/im-uniapp</a>
+            <a href="https://gitee.com/rd-guan/dguan" target="_blank">https://gitee.com/rd-guan/dguan</a>
+          </li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <div class="project-header">
+          <h3>植物大战僵尸局域网/全网联机游戏</h3>
+          <time>2024.10-2025.02</time>
+        </div>
+        <ul>
+          <li>支持多人联机、在线匹配、互动聊天，利用 socket.io 进行实时通信，实现全双工通信。</li>
+          <li>技术框架上使用 Vue + Node.js 实现，渲染采用 Phaser 游戏引擎提供高效的 2D 图形处理和物理模拟。</li>
+          <li>支持局域网和全网 P2P 服务器匹配，实现实时多人对战。</li>
+          <li>通信协议采用基于 TCP 的 WebSocket 协议进行低延迟通信，优化玩家互动体验。</li>
+          <li>游戏机制完整复刻经典 PVP 对战玩法，植物阵营玩家可以种植植物、抵御僵尸，僵尸阵营玩家可以放置僵尸、进行侵略。</li>
+          <li>游戏匹配基于 Node.js 服务器进行房间管理，支持创建房间和加入房间。</li>
+          <li>性能优化采用 Phaser 物理引擎优化渲染，结合增量更新减少数据包体积，提高网络传输效率。</li>
+          <li>数据存储采用 MySQL 数据库记录玩家对战数据、游戏进度和战绩统计。</li>
+          <li>账号管理上支持注册、登录、战绩存储，记录玩家胜率、对战数据、历史记录，并提供排行榜系统。</li>
+          <li>代码库链接：暂未开源</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>个人奖项</h2>
+      <ul>
+        <li>2022年获得优秀共产党员荣誉称号</li>
+        <li>2020-2023年连续三年获得三好学生荣誉称号</li>
+        <li>2020-2023年连续三年分别获得一等奖学金2次二等奖学金1次</li>
+        <li>2022-2023年连续两年获得国家励志奖学金</li>
+        <li>2023年获得省优秀毕业生荣誉称号</li>
+        <li>2022年作为参与者获得大学生创新创业科研立项国家级奖项</li>
+        <li>2023年获得“国家公派留学资格”。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>自我评价</h2>
+      <div class="self-evaluation">
+        <div>我是一名计算机硕士研究生，本科期间主修计算机科学与技术专业，熟悉软件设计规范，熟悉数据结构，硕士期间专注于分布式系统、函数式编程（Erlang）、Web 开发等领域，并具备扎实的计算机基础与工程实践能力。</div>
+        <div>技术能力：擅长 Erlang、C、JavaScript（Vue、Node.js），熟悉 Spring Boot、Phaser、UniApp 等技术栈，具备前后端全栈开发经验。</div>
+        <div>分布式 &amp; 并发编程：研究方向涉及惰性计算在分布式系统中的优化，关注资源调度、任务并行化，并在项目中实践相关思想。</div>
+        <div>项目经验：开发过微信小程序电商平台、可视化流程编排系统、多人联机对战游戏等多个完整项目，涵盖 Web 开发、前端交互优化、实时通信、游戏开发。</div>
+        <div>问题解决能力：善于从底层原理出发分析问题，不仅依赖现成框架，更倾向于深入理解技术本质，并通过优化算法、数据结构、系统架构提高性能。</div>
+        <div>乐于助人：在华为技术有限公司的实习期间，我对信息交互方面有了更加深刻的认识，同时在项目组长的鼓励下开始了对分布式开发技术的研究，凭借积极的学习态度快速学习吸收新知识并对同组成员进行了培训。</div>
+        <div>学习与适应能力：对新技术充满热情，能够快速掌握新框架、工具，并在实践中不断优化代码结构，提高可维护性与可扩展性。</div>
+        <div>我希望能不断拓展技术边界，结合分布式计算、Web 开发、并发编程等方向，构建高效、稳定、可扩展的系统，并在未来的研究和工作中探索更优的解决方案。</div>
+      </div>
+    </section>
+
+    <section style="text-align: center;">
+      <h2>个人主页</h2>
+      <p><a href="https://godofcode2001.github.io/" target="_blank">godofcode2001.github.io</a></p>
+    </section>
+  </div>
+</body>
+</html>

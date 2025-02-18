@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>贪吃蛇游戏</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		body{
 			margin: 0;
 			padding: 0;
 			background-color: #ddd;
 		}
-
 		canvas{
 			display: block;
-			margin: 0 auto;
+			margin: 20px auto;
 			border: 5px solid #333;
+			/* 响应式设置 */
+			max-width: 100%;
+			height: auto;
 		}
 	</style>
 </head>
@@ -47,7 +51,7 @@
 		// 定义蛇的运动方向
 		var direction = "right";
 
-		// 监听用户按键事件
+		// 监听键盘按键事件（电脑端操作）
 		document.addEventListener("keydown", function(event){
 			switch(event.keyCode){
 				case 37: // left
@@ -73,13 +77,51 @@
 			}
 		});
 
+		// 添加触摸事件（手机端操作）——通过滑动来改变方向
+		var touchStartX = null;
+		var touchStartY = null;
+
+		canvas.addEventListener("touchstart", function(e) {
+			var touch = e.touches[0];
+			touchStartX = touch.clientX;
+			touchStartY = touch.clientY;
+			e.preventDefault();
+		}, false);
+
+		canvas.addEventListener("touchend", function(e) {
+			if(touchStartX === null || touchStartY === null) return;
+			var touchEnd = e.changedTouches[0];
+			var dx = touchEnd.clientX - touchStartX;
+			var dy = touchEnd.clientY - touchStartY;
+			var absDx = Math.abs(dx);
+			var absDy = Math.abs(dy);
+			var threshold = 30; // 滑动阈值
+
+			if(absDx > absDy) { // 横向滑动
+				if(dx > threshold && direction !== "left") {
+					direction = "right";
+				} else if(dx < -threshold && direction !== "right") {
+					direction = "left";
+				}
+			} else { // 纵向滑动
+				if(dy > threshold && direction !== "up") {
+					direction = "down";
+				} else if(dy < -threshold && direction !== "down") {
+					direction = "up";
+				}
+			}
+			touchStartX = null;
+			touchStartY = null;
+			e.preventDefault();
+		}, false);
+
 		// 绘制蛇和食物
 		function draw(){
 			// 清除画布
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 			// 绘制蛇身
-			for(var i=0; i<snakeLength; i++){
+			for(var i=0; i<snake.length; i++){
 				ctx.fillStyle = "#333";
 				ctx.fillRect(snake[i].x, snake[i].y, snakeSize, snakeSize);
 			}
@@ -116,12 +158,11 @@
 			if(snake[0].x < 0 || snake[0].x >= canvas.width || snake[0].y < 0 || snake[0].y >= canvas.height){
 				clearInterval(gameLoop);
 				alert("游戏结束！你的得分是：" + score + " 分");
-                location.assign("./index.php");
-				// location.reload();
+				location.reload();
 			}
 
 			// 如果蛇头碰到自己的身体，游戏结束
-			for(var i=1; i<snakeLength; i++){
+			for(var i=1; i<snake.length; i++){
 				if(snake[0].x === snake[i].x && snake[0].y === snake[i].y){
 					clearInterval(gameLoop);
 					alert("游戏结束！你的得分是：" + score + " 分");
@@ -133,7 +174,6 @@
 			if(snake[0].x === food.x && snake[0].y === food.y){
 				food.x = Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize;
 				food.y = Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize;
-				snakeLength++;
 				score++;
 			}else{
 				snake.pop();
