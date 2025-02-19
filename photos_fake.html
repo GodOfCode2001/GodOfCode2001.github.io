@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>照片墙</title>
+  <style>
+    /* 整体页面样式 */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+    }
+    /* 容器采用 flex 布局，自动换行 */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+    }
+    /* 每张照片样式，宽度设置为约 25%（加上 margin 后大约一行 4 个） */
+    .photo {
+      width: calc(25% - 20px);
+      margin: 10px;
+      opacity: 1;
+      /* 调用动画，动画时长、效果、无限循环 */
+      animation: moveUp 5s linear infinite;
+    }
+    /* 动画定义：从当前位置向上移动100px，同时透明度从 1 变为 0 */
+    @keyframes moveUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 照片墙容器 -->
+  <div class="container" id="photoContainer"></div>
+
+  <script>
+    // 图片所在的文件夹
+    const imageFolder = './img/';
+    // 模拟图片文件列表，实际可根据实际情况替换或动态加载
+    const images = [
+      'bg1.jpg',
+      'bg2.jpg',
+      'bodybg.jpg',
+      'bodybg2.jpg',
+      'image.png',
+      'login.png',
+      'profile.jpg',
+      'bg1.jpg',
+      'bg2.jpg',
+      'bodybg.jpg',
+      'bodybg2.jpg',
+      'image.png',
+      'login.png',
+      'profile.jpg',
+      // 添加更多图片文件名...
+    ];
+
+    const container = document.getElementById('photoContainer');
+    let currentBatch = 0;
+    const batchSize = 8; // 每次加载 8 张照片（两行左右）
+
+    // 加载一批图片
+    function loadNextBatch() {
+      // 清空容器（如果需要每次循环都重新加载，可以先清空旧图片）
+      container.innerHTML = '';
+      const start = currentBatch * batchSize;
+      const end = start + batchSize;
+      const batch = images.slice(start, end);
+      
+      batch.forEach(imgName => {
+        const img = document.createElement('img');
+        img.src = imageFolder + imgName;
+        img.className = 'photo';
+        container.appendChild(img);
+      });
+      
+      // 更新批次，若超出图片列表则循环回第一个批次
+      currentBatch++;
+      if (currentBatch * batchSize >= images.length) {
+        currentBatch = 0;
+      }
+    }
+
+    // 初次加载一批
+    loadNextBatch();
+    // 每隔一定时间（如 5 秒）加载下一批
+    setInterval(loadNextBatch, 5000);
+  </script>
+</body>
+</html>

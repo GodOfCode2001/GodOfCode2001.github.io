@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <!-- 保证移动设备上正确缩放 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>连续上升破碎照片墙（响应式适配）</title>
+  <style>
+    /* 基本页面设置 */
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      width: 100%;
+      height: 100%;
+    }
+    /* 主容器全屏 */
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: pink;
+    }
+    /* 照片单元，宽高由 JS 动态设置 */
+    .photo-cell {
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* CSS 动画，从底部上升到页面顶部 */
+      animation: rise 6s linear forwards;
+    }
+    /* 动画终点使用 CSS 变量 --endTop */
+    @keyframes rise {
+      from { top: 100vh; }
+      to { top: var(--endTop); }
+    }
+    /* 碎片样式 */
+    .fragment {
+      position: absolute;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: shatter 2.5s forwards;
+    }
+    @keyframes shatter {
+      0% {
+        transform: translate(0,0) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      100% {
+        /* 结合 CSS 变量实现随机偏移、旋转、缩放及额外上移 50px */
+        transform: translate(calc(var(--dx)), calc(var(--dy) - 50px)) rotate(var(--rotate)) scale(0.5);
+        opacity: 0;
+      }
+    }
+    /* 隐藏音频控件 */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 主容器 -->
+  <div class="container" id="container"></div>
+  <audio autoplay loop preload="auto" controls src="./video/qifengle.mp3"></audio>
+  <script>
+    // 图片所在目录及图片列表（请根据实际情况更新）
+    const imageFolder = './images/';
+    const images = [
+      'psc0.jpg', 'psc1.jpg', 'psc2.jpg', 'psc3.jpg', 'psc4.jpg', 'psc5.jpg',
+      'psc6.jpg', 'psc7.jpg', 'psc8.jpg', 'psc9.jpg', 'psc10.jpg', 'psc11.jpg',
+      'psc12.jpg', 'psc13.jpg', 'psc14.jpg', 'psc15.jpg', 'psc16.jpg', 'psc17.jpg',
+      'psc18.jpg', 'psc19.jpg', 'psc20.jpg', 'psc21.jpg', 'psc22.jpg', 'psc23.jpg',
+      'psc24.jpg', 'psc25.jpg', 'psc26.jpg', 'psc27.jpg', 'psc28.jpg', 'psc29.jpg',
+      'psc30.jpg'
+    ];
+    let imageIndex = 0;
+    function getNextImage() {
+      const img = imageFolder + images[imageIndex];
+      imageIndex = (imageIndex + 1) % images.length;
+      return img;
+    }
+    // 根据当前窗口宽度连续计算照片单元尺寸（宽度占比 20%，并在 [100,300]px 范围内）
+    function getCellDimensions() {
+      const scaleFactor = 0.2;
+      let width = window.innerWidth * scaleFactor;
+      width = Math.max(100, Math.min(width, 300));
+      let height = width * 0.75; // 保持 4:3 比例
+      return { width, height };
+    }
+    const container = document.getElementById('container');
+    // 生成一个照片单元，设置随机水平位置、背景图片及动画终点
+    function spawnPhoto() {
+      const { width, height } = getCellDimensions();
+      const cell = document.createElement('div');
+      cell.className = 'photo-cell';
+      cell.style.width = width + 'px';
+      cell.style.height = height + 'px';
+      // 设置上升动画终点为负的当前高度
+      cell.style.setProperty('--endTop', `-${height}px`);
+      // 随机设置水平位置（确保不超出页面）
+      const maxLeft = window.innerWidth - width;
+      const left = Math.random() * maxLeft;
+      cell.style.left = left + 'px';
+      // 设置背景图片
+      cell.style.backgroundImage = `url(${getNextImage()})`;
+      container.appendChild(cell);
+      // 4秒后触发破碎效果
+      setTimeout(() => {
+        triggerFragment(cell);
+      }, 4000);
+      // 6秒后移除单元（上升动画结束）
+      setTimeout(() => {
+        if (cell.parentNode) {
+          cell.parentNode.removeChild(cell);
+        }
+      }, 6000);
+    }
+    // 将单元拆分为碎片并独立上升渐隐
+    function triggerFragment(cell) {
+      const rect = cell.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      const cellLeft = rect.left - containerRect.left;
+      const cellTop = rect.top - containerRect.top;
+      const cellWidth = cell.offsetWidth;
+      const cellHeight = cell.offsetHeight;
+      const bgImage = cell.style.backgroundImage;
+      // 移除原单元，以便碎片独立显示
+      if(cell.parentNode) {
+         cell.parentNode.removeChild(cell);
+      }
+      // 按 4x4 网格拆分成 16 个碎片
+      const rows = 4, cols = 4;
+      for (let r = 0; r < rows; r++){
+        for (let c = 0; c < cols; c++){
+          const frag = document.createElement('div');
+          frag.className = 'fragment';
+          const fragWidth = cellWidth / cols;
+          const fragHeight = cellHeight / rows;
+          frag.style.width = fragWidth + 'px';
+          frag.style.height = fragHeight + 'px';
+          // 计算碎片在整个容器中的位置
+          frag.style.left = (cellLeft + c * fragWidth) + 'px';
+          frag.style.top = (cellTop + r * fragHeight) + 'px';
+          // 裁剪显示图片的对应部分
+          frag.style.backgroundImage = bgImage;
+          frag.style.backgroundSize = `${cellWidth}px ${cellHeight}px`;
+          frag.style.backgroundPosition = `-${c * fragWidth}px -${r * fragHeight}px`;
+          // 随机生成偏移和旋转参数传递给动画
+          const dx = (Math.random() * 50 - 25) + 'px';
+          const dy = (Math.random() * 50 - 25) + 'px';
+          const rotate = (Math.random() * 60 - 30) + 'deg';
+          frag.style.setProperty('--dx', dx);
+          frag.style.setProperty('--dy', dy);
+          frag.style.setProperty('--rotate', rotate);
+          // 随机延迟使效果更自然
+          frag.style.animationDelay = (Math.random() * 0.3) + 's';
+          container.appendChild(frag);
+          // 动画结束后移除碎片
+          setTimeout(() => {
+            if (frag.parentNode) {
+              frag.parentNode.removeChild(frag);
+            }
+          }, 3000);
+        }
+      }
+    }
+    // 每隔 500 毫秒生成一个新的照片单元，形成源源不断的上升效果
+    setInterval(spawnPhoto, 500);
+  </script>
+</body>
+</html>
