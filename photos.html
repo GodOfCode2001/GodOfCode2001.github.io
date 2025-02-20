@@ -58,18 +58,29 @@
     }
     /* 隐藏音频控件 */
     audio {
-      position: absolute; left: -9999px;
+      position: absolute;
+      left: -9999px;
+    }
+    /* 音乐控制图标样式 */
+    #music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      color: #fff;
+      z-index: 1000;
+      cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
 <body>
   <!-- 主容器 -->
   <div class="container" id="container"></div>
-  <audio muted playsinline autoplay loop preload="auto" controls src="./video/qifengle.mp3" id="myAudio"></audio>
+  <!-- 音乐控制图标 -->
+  <div id="music-control">🎵</div>
+  <audio playsinline loop preload="auto" src="./video/qifengle.mp3" id="myAudio"></audio>
   <script>
-    window.onload = ()=> {
-      document.getElementById('myAudio').muted = false;
-    };
     // 图片所在目录及图片列表
     const imageFolder = './images/';
     const images = [
@@ -86,7 +97,7 @@
       imageIndex = (imageIndex + 1) % images.length;
       return img;
     }
-    // 根据当前窗口宽度连续计算照片单元尺寸（宽度占比 20%，并在 [100,300]px 范围内）
+    // 根据当前窗口宽度计算照片单元尺寸（宽度占比 20%，并在 [100,300]px 范围内）
     function getCellDimensions() {
       const scaleFactor = 0.2;
       let width = window.innerWidth * scaleFactor;
@@ -171,14 +182,36 @@
         }
       }
     }
-    // 每隔 500 毫秒生成一个新的照片单元，形成源源不断的上升效果
+    // 每隔 900 毫秒生成一个新的照片单元，形成源源不断的上升效果
     setInterval(spawnPhoto, 900);
 
+    // 音频控制逻辑
     var myAudio = document.getElementById('myAudio');
-    myAudio.muted = false;
-    myAudio.autoplay = true;
-    myAudio.play();
+    var musicControl = document.getElementById('music-control');
 
+    // 针对安卓设备自动播放（苹果设备通常无法在无交互下自动播放带声音的音频）
+    if (/Android/i.test(navigator.userAgent)) {
+      myAudio.muted = false; // 确保不静音
+      myAudio.play().then(() => {
+        musicControl.textContent = '🎵';
+      }).catch(err => {
+        console.log('安卓自动播放失败：', err);
+      });
+    }
+
+    // 音乐控制按钮点击事件：切换播放/暂停
+    musicControl.addEventListener('click', function() {
+      if (myAudio.paused) {
+        myAudio.play().then(() => {
+          musicControl.textContent = '🎵';
+        }).catch(err => {
+          console.log('播放失败：', err);
+        });
+      } else {
+        myAudio.pause();
+        musicControl.textContent = '🔇';
+      }
+    });
   </script>
 </body>
 </html>
