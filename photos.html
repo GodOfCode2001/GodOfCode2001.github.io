@@ -65,8 +65,18 @@
 <body>
   <!-- 主容器 -->
   <div class="container" id="container"></div>
-  <audio autoplay loop preload="auto" controls src="./video/qifengle.gif" id="myAudio"></audio>
+  <audio id="myAudio" playsinline autoplay loop preload="auto" muted src="./video/qifengle.mp3"></audio>
   <script>
+    document.addEventListener('click', function unmuteAudio() {
+      var myAudio = document.getElementById('myAudio');
+      myAudio.muted = false;
+      // 可选：如果之前播放失败，再次调用 play()
+      myAudio.play().catch(error => {
+        console.error('解除静音后播放失败:', error);
+      });
+      document.removeEventListener('click', unmuteAudio);
+    });
+
     // 图片所在目录及图片列表
     const imageFolder = './images/';
     const images = [
