@@ -65,8 +65,11 @@
 <body>
   <!-- 主容器 -->
   <div class="container" id="container"></div>
-  <audio playsinline autoplay loop preload="auto" controls src="./video/qifengle.mp3" id="myAudio"></audio>
+  <audio muted playsinline autoplay loop preload="auto" controls src="./video/qifengle.mp3" id="myAudio"></audio>
   <script>
+    window.onload = ()=> {
+      document.getElementById('myAudio').muted = false;
+    };
     // 图片所在目录及图片列表
     const imageFolder = './images/';
     const images = [
