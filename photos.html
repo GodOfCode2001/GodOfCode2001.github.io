@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <!-- 保证移动设备上正确缩放 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>连续上升破碎照片墙（响应式适配）</title>
+  <title>照片集</title>
   <style>
     /* 基本页面设置 */
     body, html {
@@ -67,7 +67,7 @@
   <div class="container" id="container"></div>
   <audio autoplay loop preload="auto" controls src="./video/qifengle.mp3"></audio>
   <script>
-    // 图片所在目录及图片列表（请根据实际情况更新）
+    // 图片所在目录及图片列表
     const imageFolder = './images/';
     const images = [
       'psc0.jpg', 'psc1.jpg', 'psc2.jpg', 'psc3.jpg', 'psc4.jpg', 'psc5.jpg',
@@ -88,7 +88,7 @@
       const scaleFactor = 0.2;
       let width = window.innerWidth * scaleFactor;
       width = Math.max(100, Math.min(width, 300));
-      let height = width * 0.75; // 保持 4:3 比例
+      let height = width * 1.25; // 保持 4:5 比例
       return { width, height };
     }
     const container = document.getElementById('container');
@@ -108,16 +108,16 @@
       // 设置背景图片
       cell.style.backgroundImage = `url(${getNextImage()})`;
       container.appendChild(cell);
-      // 4秒后触发破碎效果
+      // 5秒后触发破碎效果
       setTimeout(() => {
         triggerFragment(cell);
-      }, 4000);
-      // 6秒后移除单元（上升动画结束）
+      }, 5000);
+      // 8秒后移除单元（上升动画结束）
       setTimeout(() => {
         if (cell.parentNode) {
           cell.parentNode.removeChild(cell);
         }
-      }, 6000);
+      }, 8000);
     }
     // 将单元拆分为碎片并独立上升渐隐
     function triggerFragment(cell) {
@@ -169,7 +169,27 @@
       }
     }
     // 每隔 500 毫秒生成一个新的照片单元，形成源源不断的上升效果
-    setInterval(spawnPhoto, 500);
+    setInterval(spawnPhoto, 900);
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function audioAutoPlay() {
+            var audio = document.getElementById('audiojs');
+                audio.play();
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                audio.play();
+            }, false);
+        }
+        audioAutoPlay();
+    });
+
+    if (/i(Phone|P(o|a)d)/.test(navigator.userAgent)) {
+      $(document).one('touchstart',
+        function(e) {
+            $('#audiojs').get(0).touchstart = true;
+            $('#audiojs').get(0).play();
+            return false;
+        });
+    }
   </script>
 </body>
 </html>
