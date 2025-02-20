@@ -79,7 +79,7 @@
   <div class="container" id="container"></div>
   <!-- 音乐控制图标 -->
   <div id="music-control">🎵</div>
-  <audio playsinline loop preload="auto" src="./video/qifengle.mp3" id="myAudio"></audio>
+  <audio playsinline loop preload="auto" autoplay src="./video/qifengle.mp3" id="myAudio"></audio>
   <script>
     // 图片所在目录及图片列表
     const imageFolder = './images/';
@@ -190,7 +190,7 @@
     var musicControl = document.getElementById('music-control');
 
     // 针对安卓设备自动播放（苹果设备通常无法在无交互下自动播放带声音的音频）
-    if (/Android/i.test(navigator.userAgent)) {
+    if (/Android/i.test(navigator.userAgent)|| /HUAWEI/i.test(navigator.userAgent)) {
       myAudio.muted = false; // 确保不静音
       myAudio.play().then(() => {
         musicControl.textContent = '🎵';
