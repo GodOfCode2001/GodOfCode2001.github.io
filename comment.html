@@ -15,24 +15,24 @@
 //然后添加以下js代码来生成gitalk插件
 
 //OAuth
-// const gitalk = new Gitalk({
-//   clientID: 'Ov23lizF86J9eJPEvkrr',
-//   clientSecret: 'd4faf96789f8aca0440c3ae89bc45d435519ed79',
-//   repo: 'godofcode2001.github.io',      // The repository of store comments,
-//   owner: 'GodOfCode2001',
-//   admin: ['GodOfCode2001'],
-//   id: 'https://godofcode2001.github.io/comment.html',      // Ensure uniqueness and length less than 50
-// })
-
-//Github Apps
 const gitalk = new Gitalk({
-  clientID: 'Iv23likhFKEazfHOrcQf',
-  clientSecret: '000c56ccb496153cce744558575d0cdf12a8b0a1',
+  clientID: 'Ov23lizF86J9eJPEvkrr',
+  clientSecret: 'd4faf96789f8aca0440c3ae89bc45d435519ed79',
   repo: 'godofcode2001.github.io',      // The repository of store comments,
   owner: 'GodOfCode2001',
   admin: ['GodOfCode2001'],
   id: 'https://godofcode2001.github.io/comment.html',      // Ensure uniqueness and length less than 50
 })
+
+//Github Apps 暂时不可用
+// const gitalk = new Gitalk({
+//   clientID: 'Iv23likhFKEazfHOrcQf',
+//   clientSecret: '000c56ccb496153cce744558575d0cdf12a8b0a1',
+//   repo: 'godofcode2001.github.io',      // The repository of store comments,
+//   owner: 'GodOfCode2001',
+//   admin: ['GodOfCode2001'],
+//   id: 'https://godofcode2001.github.io/comment.html',      // Ensure uniqueness and length less than 50
+// })
 
 gitalk.render('gitalk-container')
 
